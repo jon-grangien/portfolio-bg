@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-const TrackballControls = require('three-trackballcontrols')
+// const TrackballControls = require('three-trackballcontrols')
 import { IAppUniforms } from './interfaces'
 import Plane from './Plane'
 import * as Stats from 'stats.js'
@@ -38,7 +38,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   renderer.setSize(window.innerWidth, opts.height)
   document.body.appendChild(renderer.domElement)
 
-  let controls = isDev ? new TrackballControls(camera, renderer.domElement) : undefined
+  // let controls = isDev ? new TrackballControls(camera, renderer.domElement) : undefined
 
   let stats
   if (isDev) {
@@ -59,12 +59,13 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   const plane = new Plane(uniforms)
   scene.add( plane )
 
-  plane.position.y = 20.0
-  plane.position.x = 125.0
-  plane.rotation.y = -Math.PI / 8
-  plane.rotation.x = -Math.PI / 6
+  // plane.position.y = 20.0
+  // plane.position.x = 125.0
+  // plane.rotation.y = -Math.PI / 8
+  // plane.rotation.x = -Math.PI / 6
 
   camera.position.z = 250
+  camera.position.x = 150
   camera.lookAt(plane.position)
 
   // renderer.domElement.style.backgroundImage = opts.bgColor || 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)'
@@ -82,12 +83,12 @@ function App(opts: IAppOpts): HTMLCanvasElement {
     }
 
     uniforms.u_time.value += 0.005
-    plane.rotation.z += 0.005 
+    // plane.rotation.z += 0.005 
 
     renderer.render(scene, camera)
 
     if (isDev) {
-      controls.update()
+      // controls.update()
       stats.end()
     }
   }
