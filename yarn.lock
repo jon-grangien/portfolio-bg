@@ -4547,6 +4547,10 @@ xtend@~2.1.1:
   dependencies:
     object-keys "~0.4.0"
 
+"xyz-porfolio-bg@git://github.com/jon-grangien/portfolio-bg.git", "xyz-portfolio-bg@git://github.com/jon-grangien/portfolio-bg.git":
+  version "0.0.1"
+  resolved "git://github.com/jon-grangien/portfolio-bg.git#eeebc4471c5e81f8ebac249e11211d0050726a63"
+
 y18n@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"

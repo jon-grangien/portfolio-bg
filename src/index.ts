@@ -7,7 +7,9 @@ import * as Stats from 'stats.js'
 const isDev = process.env.NODE_ENV !== 'production'
 
 interface IAppOpts {
-  height: number
+  height?: number
+  colorA: number
+  colorB: number
 }
 
 /**
@@ -15,7 +17,8 @@ interface IAppOpts {
  */
 function App(opts: IAppOpts): HTMLCanvasElement {
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / opts.height, 0.1, 5000)
+  scene.fog = new THREE.Fog(0xffffff, 0.001, 400)
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / opts.height || window.innerHeight, 0.1, 5000)
 
   window.addEventListener('resize', () => {
     let newWidth
@@ -52,9 +55,12 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   }
 
   // Light
-  const light = new THREE.PointLight(0xeeeeee, 1.2, 500)
-  light.position.set(-40, 80, 40)
-  scene.add(light)
+  const lightA = new THREE.DirectionalLight(opts.colorA, 1)
+  lightA.position.set(-40, 80, 60)
+  scene.add(lightA)
+  const lightB = new THREE.DirectionalLight(opts.colorB, 1)
+  lightB.position.set(40, -80, 60)
+  scene.add(lightB)
 
   const plane = new Plane(uniforms)
   scene.add( plane )
@@ -65,7 +71,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // plane.rotation.x = -Math.PI / 6
 
   camera.position.z = 250
-  camera.position.x = 150
+  camera.position.x = 80
   camera.lookAt(plane.position)
 
   // renderer.domElement.style.backgroundImage = opts.bgColor || 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)'
