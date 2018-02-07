@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es5", "es6", "dom"],
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "types": [
+      "node"
+    ]
+  },
+  "files": [
+    "./src/index.ts",
+    "node_modules/@types/three/index.d.ts"
+  ]
+}
