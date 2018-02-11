@@ -56,10 +56,10 @@ function App(opts: IAppOpts): HTMLCanvasElement {
 
   // Light
   const lightA = new THREE.DirectionalLight(opts.colorA, 1)
-  lightA.position.set(-40, 80, 60)
-  scene.add(lightA)
   const lightB = new THREE.DirectionalLight(opts.colorB, 1)
-  lightB.position.set(40, -80, 60)
+  lightA.position.set(-80, -80, 60)
+  lightB.position.set(80, 80, 60)
+  scene.add(lightA)
   scene.add(lightB)
 
   const plane = new Plane(uniforms)
