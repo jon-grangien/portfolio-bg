@@ -43,7 +43,8 @@ module.exports = {
         loader: 'ts-loader', 
         exclude: '/node_modules/' 
       },
-      { test: /\.(glsl|frag|vert)$/, loader: 'glsl-loader', exclude: /node_modules/ }
+      { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', exclude: /node_modules/ },
+      { test: /\.(glsl|frag|vert)$/, loader: 'glslify-loader', exclude: /node_modules/ }
       // {
       //   test: /\.glsl$/,
       //   loader: 'webpack-glsl-loader'

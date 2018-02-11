@@ -1,7 +1,8 @@
 import * as THREE from 'three'
 // const TrackballControls = require('three-trackballcontrols')
 import { IAppUniforms } from './interfaces'
-import Plane from './Plane'
+import Dummy from './Dummy'
+import Tendrils from './Tendrils'
 import * as Stats from 'stats.js'
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -33,8 +34,13 @@ function App(opts: IAppOpts): HTMLCanvasElement {
     camera.updateProjectionMatrix()
   })
 
+
+  const texture = THREE.ImageUtils.loadTexture('public/perlin-rgb.png')
+  texture.wrapT = texture.wrapS = THREE.RepeatWrapping
+
   let uniforms: IAppUniforms = {
-    u_time: { type: 'f', value: 1.0 }
+    u_time: { type: 'f', value: 1.0 },
+    u_tex: { type: 't', value: texture }
   }
 
   const renderer = new THREE.WebGLRenderer({ alpha: true })
@@ -62,17 +68,29 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   scene.add(lightA)
   scene.add(lightB)
 
-  const plane = new Plane(uniforms)
-  scene.add( plane )
+  // const dummy = new Dummy(uniforms)
+  // scene.add( dummy )
 
-  // plane.position.y = 20.0
-  // plane.position.x = 125.0
-  // plane.rotation.y = -Math.PI / 8
-  // plane.rotation.x = -Math.PI / 6
+  const tendrils = new Tendrils(uniforms)
+  tendrils.position.y = 0
+  tendrils.scale.set(5, 5, 5)
+  tendrils.rotation.y =  Math.PI
+  scene.add( tendrils )
 
-  camera.position.z = 250
-  camera.position.x = 80
-  camera.lookAt(plane.position)
+  // dummy.position.y = 20.0
+  // dummy.position.x = 125.0
+  // dummy.rotation.y = -Math.PI / 8
+  // dummy.rotation.x = -Math.PI / 6
+
+  // camera.position.z = 250
+  // camera.position.x = 80
+  // camera.lookAt(dummy.position)
+
+  camera.setLens(13, 7.49)
+  camera.position.z = 20
+  camera.position.x = 2
+  camera.position.y = 0
+  camera.lookAt(new THREE.Vector3(-2, -1, 0))
 
   // renderer.domElement.style.backgroundImage = opts.bgColor || 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)'
 
@@ -88,8 +106,8 @@ function App(opts: IAppOpts): HTMLCanvasElement {
       stats.begin()
     }
 
-    uniforms.u_time.value += 0.005
-    // plane.rotation.z += 0.005 
+    uniforms.u_time.value += 0.000005
+    // dummy.rotation.z += 0.005 
 
     renderer.render(scene, camera)
 
