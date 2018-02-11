@@ -72,10 +72,11 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // scene.add( dummy )
 
   const tendrils = new Tendrils(uniforms)
-  tendrils.position.y = 0
-  tendrils.scale.set(5, 5, 5)
-  tendrils.rotation.y =  Math.PI
   scene.add( tendrils )
+
+  tendrils.position.set(1, 0, -1)
+  tendrils.scale.set(7, 5, 1)
+  tendrils.rotation.y =  Math.PI
 
   // dummy.position.y = 20.0
   // dummy.position.x = 125.0
@@ -86,11 +87,10 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // camera.position.x = 80
   // camera.lookAt(dummy.position)
 
-  camera.setLens(13, 7.49)
-  camera.position.z = 20
+  camera.position.z = 2
   camera.position.x = 2
   camera.position.y = 0
-  camera.lookAt(new THREE.Vector3(-2, -1, 0))
+  camera.lookAt(new THREE.Vector3(0, 0, 0))
 
   // renderer.domElement.style.backgroundImage = opts.bgColor || 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)'
 

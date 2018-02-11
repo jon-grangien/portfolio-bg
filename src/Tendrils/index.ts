@@ -13,7 +13,6 @@ class Tendrils extends THREE.Object3D {
   init() {
     const mat = new THREE.ShaderMaterial({
       transparent: true,
-      wireframe: true,
       // shading: THREE.FlatShading,
       uniforms: this.uniforms,
       depthTest: false,
