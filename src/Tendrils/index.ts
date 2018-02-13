@@ -56,7 +56,8 @@ class Tendrils extends THREE.Object3D {
     const geo = new THREE.PlaneBufferGeometry(16, 16, 256, 256)
     const mesh = new THREE.Mesh(geo, mat)
     mesh.rotation.z = Math.PI
-    mesh.position.x = 3
+    mesh.rotation.y = Math.PI / 4
+    mesh.position.x = 1
     mesh.position.y = 1
     this.add(mesh)
 

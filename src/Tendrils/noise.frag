@@ -79,9 +79,10 @@ float snoise(vec2 v)
 }
 
 void main() {
-  float r = 1.5 * snoise(vUv * u_seedr);
-  float g = 2.5 * snoise(vUv * u_seedg);
-  float b = 2.3 * snoise(vUv * u_seedb);
+  float test = 0.0079;
+  float r = 10.87 * snoise(vUv * test);
+  float g = 35.65 * snoise(vUv * test);
+  float b = 100.73 * snoise(vUv * test);
 
   // Frequencies
   r += 0.5 * snoise(vUv * 4.0);
