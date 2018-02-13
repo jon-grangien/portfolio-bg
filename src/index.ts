@@ -79,9 +79,9 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // tendrils.scale.set(7, 5, 1)
   // tendrils.rotation.y =  Math.PI
 
-  camera.position.z = 7 // 2
-  camera.position.x = 2 // 2
-  camera.position.y = 0 // 0
+  camera.position.z = 5.5 // 2
+  camera.position.x = 3 // 2
+  camera.position.y = 0.5 // 0
   // camera.lookAt(new THREE.Vector3(0, 0, 0))
   camera.lookAt(tendrils.position)
 
