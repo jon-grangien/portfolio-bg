@@ -80,7 +80,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // tendrils.rotation.y =  Math.PI
 
   camera.position.z = 1.5 // 2
-  camera.position.x = 1.2 // 2
+  camera.position.x = 0.95 // 2
   camera.position.y = 0.7 // 0
   // camera.lookAt(new THREE.Vector3(0, 0, 0))
   camera.lookAt(tendrils.position)
