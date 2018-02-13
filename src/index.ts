@@ -41,7 +41,10 @@ function App(opts: IAppOpts): HTMLCanvasElement {
 
   let uniforms: IAppUniforms = {
     u_time: { type: 'f', value: 1.0 },
-    u_tex: { type: 't', value: texture }
+    u_tex: { type: 't', value: texture },
+    u_seedr: { type: 'f', value: 0.1 },
+    u_seedg: { type: 'f', value: 0.1 },
+    u_seedb: { type: 'f', value: 0.1 }
   }
 
   const renderer = new THREE.WebGLRenderer({ alpha: true })
@@ -76,7 +79,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // tendrils.scale.set(7, 5, 1)
   // tendrils.rotation.y =  Math.PI
 
-  camera.position.z = 5 // 2
+  camera.position.z = 7 // 2
   camera.position.x = 2 // 2
   camera.position.y = 0 // 0
   // camera.lookAt(new THREE.Vector3(0, 0, 0))
@@ -97,7 +100,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
     }
 
     // uniforms.u_time.value += 0.000005
-    uniforms.u_time.value += 0.05
+    uniforms.u_time.value += 0.005
     tendrils.updateTime(uniforms.u_time.value)
     tendrils.update()
 

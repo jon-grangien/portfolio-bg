@@ -17,9 +17,20 @@ class Tendrils extends THREE.Object3D {
   }
 
   init() {
+    const min = 0.3
+    const max = 0.7
+    const seedR = THREE.Math.randFloat(min, max)
+    const seedG = THREE.Math.randFloat(min, max)
+    const seedB = THREE.Math.randFloat(min, max)
+
+    this.uniforms.u_seedr.value = seedR
+    this.uniforms.u_seedg.value = seedG
+    this.uniforms.u_seedb.value = seedB
+
     const textureShader = new THREE.ShaderMaterial({
       vertexShader: require('./noise.vert'),
-      fragmentShader: require('./noise.frag')
+      fragmentShader: require('./noise.frag'),
+      uniforms: this.uniforms
     })
 
     this._fbo = new FBOHelper(512, 512, this._renderer, textureShader)
@@ -43,17 +54,22 @@ class Tendrils extends THREE.Object3D {
     })
 
     const geo = new THREE.PlaneBufferGeometry(16, 16, 256, 256)
-    this.add(new THREE.Mesh(geo, mat))
+    const mesh = new THREE.Mesh(geo, mat)
+    mesh.rotation.z = Math.PI
+    mesh.position.x = 3
+    mesh.position.y = 1
+    this.add(mesh)
 
     if (this._visualizeNoise) {
       const matForVis = new THREE.MeshBasicMaterial({
         map: this._fbo.texture
       })
       const geoForVis = new THREE.PlaneBufferGeometry(16, 16, 256, 256)
-      const mesh = new THREE.Mesh(geoForVis, matForVis)
-      mesh.scale.set(0.4, 0.4, 0.4)
-      mesh.rotation.y = Math.PI / 6
-      this.add(mesh)
+      const visMesh = new THREE.Mesh(geoForVis, matForVis)
+      visMesh.scale.set(0.4, 0.4, 0.4)
+      visMesh.rotation.y = Math.PI / 6
+      visMesh.position.x = -5
+      this.add(visMesh)
     }
   }
 

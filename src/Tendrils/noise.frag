@@ -2,6 +2,10 @@ varying vec2 vUv;
 varying vec3 vPos;
 varying vec3 vNormal;
 
+uniform float u_seedr;
+uniform float u_seedg;
+uniform float u_seedb;
+
 //
 // Description : Array and textureless GLSL 2D simplex noise function.
 //      Author : Ian McEwan, Ashima Arts.
@@ -75,16 +79,15 @@ float snoise(vec2 v)
 }
 
 void main() {
-  float r = snoise(vUv * 2.0);
-  float g = snoise(vUv * 3.0);
-  float b = snoise(vUv * 1.0);
+  float r = 1.5 * snoise(vUv * u_seedr);
+  float g = 2.5 * snoise(vUv * u_seedg);
+  float b = 2.3 * snoise(vUv * u_seedb);
 
+  // Frequencies
   r += 0.5 * snoise(vUv * 4.0);
   r += 0.125 * snoise(vUv * 8.0);
-
   g += 0.5 * snoise(vUv * 6.0);
   g += 0.125 * snoise(vUv * 12.0);
-
   b += 0.5 * snoise(vUv * 2.0);
   b += 0.125 * snoise(vUv * 4.0);
 
@@ -96,6 +99,7 @@ void main() {
   // vec3 colorB = vec3(0.0, 0.0, 1.0);
   // vec3 color = mix(colorA, colorB, smoothstep(0.0, 1.0, noise));
 
+  // Don't truncate noise values below or beyond 0/1
   vec3 color = vec3(r, g, b);
 
   gl_FragColor = vec4(color, 1.0);
