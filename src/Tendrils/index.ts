@@ -53,7 +53,7 @@ class Tendrils extends THREE.Object3D {
       fragmentShader: require('./main.frag')
     })
 
-    const geo = new THREE.PlaneBufferGeometry(16, 16, 256, 256)
+    const geo = new THREE.PlaneBufferGeometry(16, 16, 512, 512)
     const mesh = new THREE.Mesh(geo, mat)
     mesh.rotation.z = Math.PI
     mesh.rotation.y = Math.PI / 4

@@ -79,18 +79,21 @@ float snoise(vec2 v)
 }
 
 void main() {
-  float test = 0.0079;
-  float r = 10.87 * snoise(vUv * test);
-  float g = 35.65 * snoise(vUv * test);
-  float b = 100.73 * snoise(vUv * test);
+  float test = 0.008;
+  float r = 23.87 * snoise(vUv * test + 0.001);
+  float g = 13.65 * snoise(vUv * test - 0.001);
+  float b = 80.0 * snoise(vUv * test + 0.001);
 
   // Frequencies
   r += 0.5 * snoise(vUv * 4.0);
   r += 0.125 * snoise(vUv * 8.0);
+  // r += 0.625 * snoise(vUv * 16.0);
   g += 0.5 * snoise(vUv * 6.0);
   g += 0.125 * snoise(vUv * 12.0);
+  // g += 0.625 * snoise(vUv * 16.0);
   b += 0.5 * snoise(vUv * 2.0);
   b += 0.125 * snoise(vUv * 4.0);
+  // b += 0.625 * snoise(vUv * 16.0);
 
   // noise += 0.5 * snoise(vUv * 20.0);
   // noise += 0.25 * snoise(vUv * 40.0);
@@ -102,6 +105,7 @@ void main() {
 
   // Don't truncate noise values below or beyond 0/1
   vec3 color = vec3(r, g, b);
+  // color = mix(vec3(0.0, 0.0, 1.0), color, smoothstep(-0.01, 0.0, color.b));
 
   gl_FragColor = vec4(color, 1.0);
 }

@@ -8,7 +8,7 @@ void main() {
   vec4 tex = texture2D(u_tex, uv);
 
   // float scrollSpeed = 55.0;
-  float speed = 0.1;
+  float speed = 0.06;
   vec4 tex2 = texture2D(u_tex, vec2(tex.r + u_time * speed, tex.b + u_time * speed));
 
   // vec3 pos = tex2.rgb - vec3(.5, .5, .5);
