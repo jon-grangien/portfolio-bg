@@ -3,7 +3,9 @@ uniform sampler2D u_tex;
 varying vec2 vUv;
 
 void main() {
-  vec4 tex = texture2D(u_tex, vUv + u_time * 250.);
+  float bump = 0.001;
+  float intensity = 2.0;
+  vec4 tex = intensity * texture2D(u_tex, vUv + u_time * bump);
 
-  gl_FragColor = vec4(tex.rgb * 1.5, .07);
+  gl_FragColor = vec4(tex.rgb, .07);
 }

@@ -11,6 +11,7 @@ interface IAppOpts {
   height?: number
   colorA: number
   colorB: number
+  visualizeNoise?: boolean
 }
 
 /**
@@ -18,8 +19,8 @@ interface IAppOpts {
  */
 function App(opts: IAppOpts): HTMLCanvasElement {
   const scene = new THREE.Scene()
-  scene.fog = new THREE.Fog(0xffffff, 0.001, 400)
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / opts.height || window.innerHeight, 0.1, 5000)
+  // scene.fog = new THREE.FogExp2(opts.colorB, 0.0005)
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / opts.height || window.innerHeight, 0.1, 500)
 
   window.addEventListener('resize', () => {
     let newWidth
@@ -68,29 +69,18 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   scene.add(lightA)
   scene.add(lightB)
 
-  // const dummy = new Dummy(uniforms)
-  // scene.add( dummy )
-
-  const tendrils = new Tendrils(uniforms)
+  const tendrils = new Tendrils(uniforms, renderer, opts.visualizeNoise)
   scene.add( tendrils )
 
-  tendrils.position.set(1, 0, -1)
-  tendrils.scale.set(7, 5, 1)
-  tendrils.rotation.y =  Math.PI
+  // tendrils.position.set(1, 0, -1)
+  // tendrils.scale.set(7, 5, 1)
+  // tendrils.rotation.y =  Math.PI
 
-  // dummy.position.y = 20.0
-  // dummy.position.x = 125.0
-  // dummy.rotation.y = -Math.PI / 8
-  // dummy.rotation.x = -Math.PI / 6
-
-  // camera.position.z = 250
-  // camera.position.x = 80
-  // camera.lookAt(dummy.position)
-
-  camera.position.z = 2
-  camera.position.x = 2
-  camera.position.y = 0
-  camera.lookAt(new THREE.Vector3(0, 0, 0))
+  camera.position.z = 5 // 2
+  camera.position.x = 2 // 2
+  camera.position.y = 0 // 0
+  // camera.lookAt(new THREE.Vector3(0, 0, 0))
+  camera.lookAt(tendrils.position)
 
   // renderer.domElement.style.backgroundImage = opts.bgColor || 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)'
 
@@ -106,8 +96,10 @@ function App(opts: IAppOpts): HTMLCanvasElement {
       stats.begin()
     }
 
-    uniforms.u_time.value += 0.000005
-    // dummy.rotation.z += 0.005 
+    // uniforms.u_time.value += 0.000005
+    uniforms.u_time.value += 0.05
+    tendrils.updateTime(uniforms.u_time.value)
+    tendrils.update()
 
     renderer.render(scene, camera)
 
