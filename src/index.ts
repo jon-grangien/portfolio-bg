@@ -22,6 +22,10 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // scene.fog = new THREE.FogExp2(opts.colorB, 0.0005)
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / opts.height || window.innerHeight, 0.1, 500)
 
+  camera.position.z = 1.5 // 2
+  camera.position.x = 0.95 // 2
+  camera.position.y = 0.7 // 0
+
   window.addEventListener('resize', () => {
     let newWidth
     const newHeight =	window.innerHeight < opts.height ? window.innerHeight : opts.height
@@ -44,7 +48,8 @@ function App(opts: IAppOpts): HTMLCanvasElement {
     u_tex: { type: 't', value: texture },
     u_seedr: { type: 'f', value: 0.1 },
     u_seedg: { type: 'f', value: 0.1 },
-    u_seedb: { type: 'f', value: 0.1 }
+    u_seedb: { type: 'f', value: 0.1 },
+    u_cameraPos: { type: 'v3', value: new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)}
   }
 
   const renderer = new THREE.WebGLRenderer({ alpha: true })
@@ -79,9 +84,6 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // tendrils.scale.set(7, 5, 1)
   // tendrils.rotation.y =  Math.PI
 
-  camera.position.z = 1.5 // 2
-  camera.position.x = 0.95 // 2
-  camera.position.y = 0.7 // 0
   // camera.lookAt(new THREE.Vector3(0, 0, 0))
   camera.lookAt(tendrils.position)
 

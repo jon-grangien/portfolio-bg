@@ -1,5 +1,8 @@
 uniform float u_time;
 uniform sampler2D u_tex;
+uniform vec3 u_cameraPos;
+
+varying float vDist;
 varying vec2 vUv;
 
 void main() {
@@ -13,6 +16,8 @@ void main() {
 
   // vec3 pos = tex2.rgb - vec3(.5, .5, .5);
   vec3 pos = tex2.rgb;
+
+  vDist = length(u_cameraPos - pos) / u_cameraPos.z;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
