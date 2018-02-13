@@ -17,8 +17,8 @@ class Tendrils extends THREE.Object3D {
   }
 
   init() {
-    const min = 0.3
-    const max = 0.7
+    const min = 0.0007
+    const max = 0.0012
     const seedR = THREE.Math.randFloat(min, max)
     const seedG = THREE.Math.randFloat(min, max)
     const seedB = THREE.Math.randFloat(min, max)

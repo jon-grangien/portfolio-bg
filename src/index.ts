@@ -79,9 +79,9 @@ function App(opts: IAppOpts): HTMLCanvasElement {
   // tendrils.scale.set(7, 5, 1)
   // tendrils.rotation.y =  Math.PI
 
-  camera.position.z = 5.5 // 2
-  camera.position.x = 3 // 2
-  camera.position.y = 0.5 // 0
+  camera.position.z = 1.5 // 2
+  camera.position.x = 1.2 // 2
+  camera.position.y = 0.7 // 0
   // camera.lookAt(new THREE.Vector3(0, 0, 0))
   camera.lookAt(tendrils.position)
 
@@ -100,7 +100,7 @@ function App(opts: IAppOpts): HTMLCanvasElement {
     }
 
     // uniforms.u_time.value += 0.000005
-    uniforms.u_time.value += 0.005
+    uniforms.u_time.value += 0.0007
     tendrils.updateTime(uniforms.u_time.value)
     tendrils.update()
 

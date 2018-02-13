@@ -79,20 +79,20 @@ float snoise(vec2 v)
 }
 
 void main() {
-  float test = 0.008;
-  float r = 23.87 * snoise(vUv * test + 0.001);
-  float g = 13.65 * snoise(vUv * test - 0.001);
-  float b = 80.0 * snoise(vUv * test + 0.001);
+  float test = 0.00008;
+  float r = 23.87 * snoise(vUv * test + u_seedr);
+  float g = 13.65 * snoise(vUv * test - u_seedg);
+  float b = 50.0 * snoise(vUv * test + u_seedb);
 
   // Frequencies
   r += 0.5 * snoise(vUv * 4.0);
-  r += 0.125 * snoise(vUv * 8.0);
+  // r += 0.125 * snoise(vUv * 8.0);
   // r += 0.625 * snoise(vUv * 16.0);
   g += 0.5 * snoise(vUv * 6.0);
-  g += 0.125 * snoise(vUv * 12.0);
+  // g += 0.125 * snoise(vUv * 12.0);
   // g += 0.625 * snoise(vUv * 16.0);
   b += 0.5 * snoise(vUv * 2.0);
-  b += 0.125 * snoise(vUv * 4.0);
+  // b += 0.125 * snoise(vUv * 4.0);
   // b += 0.625 * snoise(vUv * 16.0);
 
   // noise += 0.5 * snoise(vUv * 20.0);
@@ -104,6 +104,12 @@ void main() {
   // vec3 color = mix(colorA, colorB, smoothstep(0.0, 1.0, noise));
 
   // Don't truncate noise values below or beyond 0/1
+  r += 1.0;
+  g += 1.0;
+  b += 1.0;
+  r /= 2.0;
+  g /= 2.0;
+  b /= 2.0;
   vec3 color = vec3(r, g, b);
   // color = mix(vec3(0.0, 0.0, 1.0), color, smoothstep(-0.01, 0.0, color.b));
 
